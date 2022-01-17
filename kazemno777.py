@@ -8,7 +8,7 @@ fon = wrap.sprite.add("foi", 500, 400, "fon")
 fon = wrap.sprite.set_size(fon, 1000, 800)
 ooe = wrap.sprite.add_text(" ", 500, 300, text_color=(0, 255, 4), font_size=50)
 baraban_on = 0
-
+gdkg=[]
 zifre = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
@@ -23,9 +23,9 @@ def kazinritapora():
         x += 50
         if did == 10:
             x += 20
-        wrap.sprite.add_text(str(did), x, 650, text_color=(0, 123, 4), font_size=50, back_color=[255, 12, 0])
+        id_sprite=wrap.sprite.add_text(str(did), x, 650, text_color=(0, 123, 4), font_size=50, back_color=[255, 12, 0])
 
-
+        gdkg.append(id_sprite)
 @wrap.always()
 def vibor_zifor():
     if baraban_on == 1:
@@ -43,8 +43,21 @@ def rererererere():
         baraban_on = 1
     else:
 
-
         baraban_on = 0
+
+
+@wrap.on_mouse_down(wrap.BUTTON_LEFT)
+def gyyggyggyg (pos_x,pos_y):
+    for did in gdkg:
+        yre=wrap.sprite.is_collide_point(did,pos_x,pos_y)
+        if yre==True  :
+            wrap.sprite_text.set_text_color(did,0,0,255)
+
+
+
+
+
+
 
 
 kazinritapora()
