@@ -12,6 +12,8 @@ gdkg = []
 zifre = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 kolvomonet = 10
 vipavshee_chislo=None
+wrap.sprite.add_text("МОНЕТЫ", 80, 25, text_color=(0, 255, 4), font_size=30)
+kolvomonet_id = wrap.sprite.add_text(str(kolvomonet), 180, 25, text_color=(0, 255, 4), font_size=30)
 
 
 def kazinritapora():
@@ -29,7 +31,7 @@ def kazinritapora():
 
 @wrap.always()
 def vibor_zifor():
-    global  vipavshee_chisl
+    global  vipavshee_chislo
     if baraban_on == 1:
         pervoe = zifre[4]
         vtoroe = zifre[4]
@@ -40,32 +42,30 @@ def vibor_zifor():
 
 @wrap.on_key_down(wrap.K_SPACE)
 def rererererere():
-    global baraban_on
+    global baraban_on ,stavka
     if baraban_on == 0:
         baraban_on = 1
     else:
 
         baraban_on = 0
+        if vipavshee_chislo==stavka :
+            kolvomonet += 5
+            wrap.sprite_text.set_text(kolvomonet_id, str(kolvomonet))
 
 
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
-def gyyggyggyg(pos_x, pos_y):
+def delaem_stavku(pos_x, pos_y):
+    global old, vipavshee_chislo, kolvomonet,stavka
     for did in gdkg:
-        global old,vipavshee_chislo,kolvomonet
+        stavka=did
         yre = wrap.sprite.is_collide_point(did, pos_x, pos_y)
-        kolvomonet_id=wrap.sprite.add_text(str(kolvomonet), 180, 25, text_color=(0, 255, 4), font_size=30)
-        wrap.sprite.add_text("МОНЕТЫ", 80, 25, text_color=(0, 255, 4), font_size=30)
+
         if yre == True:
-
-
             wrap.sprite_text.set_text_color(did, 0, 0, 255)
             wrap.sprite_text.set_text_color(old, 0, 123, 4)
             old = did
 
 
-            if vipavshee_chislo==did :
-                kolvomonet+=5
-                wrap.sprite_text.set_text(kolvomonet_id,str(kolvomonet))
 
 
 
