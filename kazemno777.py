@@ -1,12 +1,13 @@
 import random
+import time
 
 import wrap
 
 wrap.add_sprite_dir("fion")
 wrap.world.create_world(1000, 800)
 fon = wrap.sprite.add("foi", 500, 400, "fon")
-fon = wrap.sprite.set_size(fon, 1000, 800)
-ooe = wrap.sprite.add_text(" ", 500, 300, text_color=(0, 255, 4), font_size=50)
+wrap.sprite.set_size(fon, 1000, 800)
+risuembaraban = wrap.sprite.add_text(" ", 500, 300, text_color=(0,0,0), font_size=50)
 baraban_on = 0
 spisok_id_zhifr = []
 zifre = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -14,6 +15,7 @@ kolvomonet = 10
 vipavshee_chislo=None
 wrap.sprite.add_text("МОНЕТЫ", 80, 25, text_color=(0, 255, 4), font_size=30)
 kolvomonet_id = wrap.sprite.add_text(str(kolvomonet), 180, 25, text_color=(0, 255, 4), font_size=30)
+stavka=None
 
 
 def kazinritapora():
@@ -33,28 +35,41 @@ def kazinritapora():
 def vibor_zifor():
     global  vipavshee_chislo
     if baraban_on == 1:
-        pervoe = zifre[7]
-        vtoroe = zifre[7]
+        pervoe = zifre[1]
+        vtoroe = zifre[-1]
+        oi = random.randint(1, 255)
+        oio = random.randint(1, 255)
+        io = random.randint(1, 255)
 
+        wrap.sprite_text.set_text_color(risuembaraban,oi,io,oio)
         vipavshee_chislo = random.randint(int(pervoe), int(vtoroe))
-        wrap.sprite_text.set_text(ooe, str(vipavshee_chislo))
-        print(vipavshee_chislo)
+        wrap.sprite_text.set_text(risuembaraban, str(vipavshee_chislo))
 
 @wrap.on_key_down(wrap.K_SPACE)
 def rererererere():
     global baraban_on ,stavka,kolvomonet
     if baraban_on == 0:
         baraban_on = 1
+        wrap.sprite_text.set_back_color_transparent(risuembaraban)
+
     else:
 
         baraban_on = 0
-        stavka=wrap.sprite_text.get_text(stavka)
-        stavka=int(stavka)
-        if vipavshee_chislo==stavka :
+        wrap.sprite_text.set_back_color(risuembaraban,255,65,1)
+
+        stavka_str=wrap.sprite_text.get_text(stavka)
+        stavka_str=int(stavka_str)
+        if vipavshee_chislo==stavka_str:
             kolvomonet += 5
             wrap.sprite_text.set_text(kolvomonet_id, str(kolvomonet))
+        else:
+            kolvomonet-=1
+            wrap.sprite_text.set_text(kolvomonet_id, str(kolvomonet))
+        if kolvomonet<0:
+            wrap.sprite.set_size(fon, 0,0)
+            wrap.sprite.add_text("GAME OVER", 500,555, text_color=(0, 255, 4), font_size=50)
 
-
+        print(stavka)
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def delaem_stavku(pos_x, pos_y):
     global old, vipavshee_chislo, kolvomonet,stavka
@@ -77,6 +92,8 @@ def delaem_stavku(pos_x, pos_y):
 
 kazinritapora()
 old = spisok_id_zhifr[0]
+stavka=old
+
 wrap.sprite_text.set_text_color(old, 0, 0, 255)
 
 import wrap_py
